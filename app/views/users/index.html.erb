@@ -1,1 +1,6 @@
+<%= form_tag(users_path, method: 'GET') do %>
+ 内容検索：<%= text_field_tag 's[content]' %>
+  <%= submit_tag('Search') %>
+<% end %>
+<hr>
 <%= render 'users', users: @users %>

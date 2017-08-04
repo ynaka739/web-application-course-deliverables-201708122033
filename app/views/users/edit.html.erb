@@ -1,13 +1,12 @@
-<% if logged_in? %>
 <div class="text-center">
-  <h1>Sign up</h1>
+  <h1>Edit</h1>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 
     <%= form_for(@user) do |f| %>
-    <%= render 'layouts/error_messages', model: f.object %>
+      <%= render 'layouts/error_messages', model: f.object %>
 
       <div class="form-group">
         <%= f.label :name, 'Name' %>
@@ -29,8 +28,7 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
 
-      <%= f.submit 'Sign up', class: 'btn btn-primary btn-block' %>
+      <%= f.submit 'Update', class: 'btn btn-primary btn-block' %>
     <% end %>
   </div>
 </div>
-<% end %>
