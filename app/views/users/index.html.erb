@@ -1,6 +1,23 @@
-<%= form_tag(users_path, method: 'GET') do %>
- 内容検索：<%= text_field_tag 's[content]' %>
-  <%= submit_tag('Search') %>
+<h1>Search for Users</h1>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :name_cont %>
+  <%= f.search_field :name_cont %>
+  <%= f.submit %>
 <% end %>
+<table>
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :name) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <hr>
 <%= render 'users', users: @users %>

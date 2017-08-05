@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :favorites]  
+  before_action :require_user_logged_in, only: [:index, :show, :new, :create, :followings, :followers, :favorites]  
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.page(params[:page])
-    @users = @users.search(params[:s]) if params[:s]
+    # @users = User.all.page(params[:page])
+    @q = User.ransack(params[:q])
+    @users = @q.result.order(id: :DESC).page(params[:page])
   end
 
   def show
@@ -14,11 +15,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    unless logged_in?
-    redirect_to root_url
-    else
     @user = User.new
-    end
   end
 
   def create
@@ -29,7 +26,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
-      render :new
+     render :new
     end
   end
   
