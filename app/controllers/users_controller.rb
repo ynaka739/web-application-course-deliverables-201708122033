@@ -3,15 +3,16 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    # @users = User.all.page(params[:page])
     @q = User.ransack(params[:q])
     @users = @q.result.order(id: :DESC).page(params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order('created_at DESC').page(params[:page])
+    # @microposts = @user.microposts.order('created_at DESC').page(params[:page])
     counts(@user)
+    @q = Micropost.ransack(params[:q])
+    @microposts = @q.result.order(id: :DESC).page(params[:page])
   end
 
   def new

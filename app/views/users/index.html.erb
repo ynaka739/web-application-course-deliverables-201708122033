@@ -1,5 +1,6 @@
 <h1>Search for Users</h1>
 
+<%# form_for の代わりに search_form_for を使うことで検索フォームを作成 %>
 <%= search_form_for @q do |f| %>
   <%= f.label :name_cont %>
   <%= f.search_field :name_cont %>
@@ -19,5 +20,6 @@
     <% end %>
   </tbody>
 </table>
-<hr>
+
 <%= render 'users', users: @users %>
+
