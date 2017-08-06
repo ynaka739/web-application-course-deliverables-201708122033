@@ -6,20 +6,6 @@
   <%= f.search_field :name_cont %>
   <%= f.submit %>
 <% end %>
-<table>
-  <thead>
-    <tr>
-      <th><%= sort_link(@q, :name) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<hr>
 <%= render 'users', users: @users %>
 

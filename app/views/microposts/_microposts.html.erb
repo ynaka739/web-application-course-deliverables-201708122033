@@ -13,6 +13,9 @@
           <p><%= micropost.content %></p>
         </div>
         <div>
+          <p><%= image_tag micropost.image.url if micropost.image? %></p>
+        </div>
+        <div>
           <%= render 'favorites/like_button', micropost: micropost %>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
