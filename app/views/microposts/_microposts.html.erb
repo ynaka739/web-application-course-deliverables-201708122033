@@ -13,7 +13,7 @@
           <p><%= micropost.content %></p>
         </div>
         <div>
-          <p><%= image_tag micropost.image.url if micropost.image? %></p>
+          <p class="photo-size"><%= image_tag micropost.image.url if micropost.image? %></p>
         </div>
         <div>
           <%= render 'favorites/like_button', micropost: micropost %>
