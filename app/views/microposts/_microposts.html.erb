@@ -1,50 +1,28 @@
-<ul class="media-list">
-  <% microposts.each do |micropost| %>
-    <% user = micropost.user %>
-    <li class="media">
-      <div class="media-left">
-        <img class="media-object img-rounded" src="<%= gravatar_url(user, options = { size: 50 }) %>" alt="">
-      </div>
-      <div class="media-body">
-        <div>
+<% microposts.each do |micropost| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <% user = micropost.user %>
+        <img src="<%= gravatar_url(user, options = { size: 50 }) %>" alt="">
           <%= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
-        </div>
-        <div>
           <p><%= micropost.content %></p>
-        </div>
-        <div>
           <p class="photo-size"><%= image_tag micropost.image.url if micropost.image? %></p>
-        </div>
-        <div>
           <%= render 'favorites/like_button', micropost: micropost %>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
-        </div>
-      </div>
+    </div>
+     <div class="panel-body">
       <% if micropost.retweets.present? %>
         <% micropost.retweets.each do |retweet| %>
-          <div class="media-left">
-        <img class="media-object img-rounded" src="<%= gravatar_url(user, options = { size: 50 }) %>" alt="">
-      </div>
-      <div class="media-body">
-        <div>
+         
+        <img src="<%= gravatar_url(user, options = { size: 50 }) %>" alt="">
           <%= link_to retweet.user.name, user_path(retweet.user) %> <span class="text-muted">posted at <%= retweet.created_at %></span>
-        </div>
-        <div>
           <p><%= retweet.content %></p>
-        </div>
-        <div>
           <p class="photo-size"><%= image_tag retweet.image.url if retweet.image? %></p>
-        </div>
-        <div>
           <%= render 'favorites/like_button', micropost: micropost %>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
-        </div>
-      </div>
-        
         <% end %>
       <% end %>
       <%= form_for Micropost.new do |f| %>
@@ -55,9 +33,14 @@
         </div>
         <%= f.submit 'Retweet', class: 'btn btn-primary btn-xs' %>
       <% end %>
+          
+          </div>
+        
       <hr>
-    </li>
+      
   <% end %>
+
   <%= paginate microposts %>
-</ul>
+</div>
+
 
