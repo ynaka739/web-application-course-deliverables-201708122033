@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     # @microposts = @user.microposts.order('created_at DESC').page(params[:page])
     counts(@user)
     @q = Micropost.ransack(params[:q])
-    @microposts = @q.result.order(id: :DESC).page(params[:page])
+    @microposts = @q.result.where(retweet_id: nil).order(id: :DESC).page(params[:page])
   end
 
   def new
