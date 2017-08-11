@@ -53,4 +53,4 @@ production:
   pool: 5
   database: bulletin-board_production
   username: bulletin-board
-  password: <%= ENV[‘BULLETIN-BOARD_DATABASE_PASSWORD'] %>
+  password: <%= ENV['BULLETIN-BOARD_DATABASE_PASSWORD'] %>
