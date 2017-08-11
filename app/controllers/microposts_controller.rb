@@ -1,7 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
-  
   def index
     @q = Micropost.ransack(params[:q])
     @microposts = @q.result.order(id: :DESC).page(params[:page])
@@ -20,8 +19,11 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.destroy
-    flash[:success] = 'メッセージを削除しました。'
+    if @micropost.destroy
+      flash[:success] = 'メッセージを削除しました。'
+    else
+      flash[:danger] = 'メッセージの削除に失敗しました。'
+    end
     redirect_back(fallback_location: root_path)
   end
 

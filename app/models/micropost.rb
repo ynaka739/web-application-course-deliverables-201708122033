@@ -1,7 +1,7 @@
 class Micropost < ApplicationRecord
   mount_uploader :image, ImageUploader
   belongs_to :user
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   
   has_many :retweets, class_name: 'Micropost', foreign_key: 'retweet_id'
  
