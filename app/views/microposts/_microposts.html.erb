@@ -20,8 +20,8 @@
           <p><%= retweet.content %></p>
           <p class="photo-size"><%= image_tag retweet.image.url if retweet.image? %></p>
           <%= render 'favorites/like_button', micropost: micropost %>
-          <% if current_user == micropost.user %>
-            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% if current_user == retweet.user %>
+            <%= link_to "Delete", retweet, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
         <% end %>
       <% end %>
